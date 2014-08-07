@@ -19,26 +19,20 @@ var myApp = angular.module('myApp',['ngRoute'])
 	$scope.accountId ="01249873471233";
 }])
 
-.config(function($routeProvider, $locationProvider) {
-	  $routeProvider
-	   .when('/user', {
-	    templateUrl: 'app/views/user.html',
-	    controller: 'UserController'
-	  })
-	  .when('/account', {
-	    templateUrl: 'app/views/account.html',
-	    controller: 'AccountController'
-	  })
-	   .when('/loan', {
-	    templateUrl: 'app/views/loan.html',
-	    controller: 'UserController'
-	  })
-	   .when('/logout', {
-	    templateUrl: 'app/views/logout.html',
-	    controller: 'UserController'
-	  })
-	  .otherwise({
-        redirectTo: '/'
-      });
-	  $locationProvider.html5Mode(true);
-});
+.controller('LoanController', ['$scope', function($scope) {
+	$scope.firstName = 'sethuraman';
+	$scope.lastName = 'bose';
+}])
+
+.controller('LogoutController', ['$scope', function($scope) {
+	$scope.firstName = 'sethuraman';
+	$scope.lastName = 'bose';
+}])
+
+.config(['$routeProvider', function($routeProvider) {
+	  $routeProvider.when('/user', {templateUrl: 'views/user.html', controller: 'UserController'});
+	  $routeProvider.when('/account', {templateUrl: 'views/account.html',controller: 'AccountController'});
+	  $routeProvider.when('/loan', {templateUrl: 'views/loan.html',controller: 'LoanController'});
+	  $routeProvider.when('/logout', {templateUrl: 'views/logout.html',controller: 'LogoutController'});
+	  $routeProvider.otherwise({redirectTo: '/user'});
+}]);
